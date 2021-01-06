@@ -1,0 +1,17 @@
+{
+    "name": "imithu/ll",
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Mahmudul Hasan Mithu",
+            "email": "imithu@imithu.com"
+        }
+    ],
+    "require": {},
+    "autoload": {
+        "psr-4": {
+            "LL\\":["LL"]
+        }
+    }
+}
