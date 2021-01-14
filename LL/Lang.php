@@ -3,8 +3,30 @@
 namespace LL;
 
 
+use Illuminate\Support\Facades\Storage;
+
+
 
 class Lang{
+
+    /**
+     * @var array $config
+     * 
+     * 
+     * @version 2.0.0
+     * @since 2.0.0
+     * @author Mahmudul Hasan Mithu
+     */
+    private static $config = NULL;
+
+    /**
+     * @var string $lang_default
+     * 
+     * @version 2.0.0
+     * @since 2.0.0
+     * @author Mahmudul Hasan Mithu
+     */
+    private static $lang_default = NULL ;
 
     /**
      * @var string $Path - Set the language location files
@@ -16,119 +38,133 @@ class Lang{
     public static $Path = '';
 
 
+
+    
     /**
+     * set the language in cookie for 100 years (approx.)
+     * --------------------------------------------------
+     * totally independent method
      * 
-     * set the language
      * 
-     * @param string $name - (optional)
+     * @param string $lang - lang name
      * 
      * 
-     * @version 1.0.0
+     * @version 2.0.0
      * @since 1.0.0
      * @author Mahmudul Hasan Mithu
      */
-    public static function lang_set( $name='' )
+    public static function lang_set( $lang )
     {
-        if( $name=='' ){
-            $name = self::lang_default_get();
-            setcookie( 'LL_Lang', $name, (time()+(3600*24*30*13*100)), '/' );
-        }else{
-            setcookie( 'LL_Lang', $name, (time()+(3600*24*30*13*100)), '/' );
-        }
+        setcookie( 'LL_Lang', $lang, (time()+(3600*24*30*13*100)), '/' );
     }
+
+
+
+
+    /**
+     * determine config and lang_default
+     * ----------------------------------
+     * totally independent method
+     * 
+     * @version 2.0.0
+     * @since   2.0.0
+     * @author  Mahmudul Hasan Mithu
+     */
+    private static function config()
+    {
+        $config = Storage::disk('local')->path('LL/Self/config.json');
+        $config = json_decode(file_get_contents($config), true);
+
+        self::$config = $config;
+        self::$lang_default = $config['lang_default'];
+    }
+
+
 
 
     /**
      * 
      * get the language
+     * ---------------------------
+     * depends on config()
      * 
      * 
      * @return string - language name
      * 
-     * @version 1.0.0
+     * @version 2.0.0
      * @since 1.0.0
      * @author Mahmudul Hasan Mithu
      */
     public static function lang_get()
     {
+        self::config();
+        
         if( isset($_COOKIE['LL_Lang']) ){
-            $lang = htmlspecialchars($_COOKIE['LL_Lang']);
-        }else{
-            self::lang_set();
-            $lang = 'en';
+            return htmlspecialchars($_COOKIE['LL_Lang']);
         }
-        return $lang;
+        
+        self::lang_set( self::$lang_default );
+        return self::$lang_default;
     }
+
+
 
 
     /**
+     * check if a lang is rtl or not
+     * ----------------------------------
+     * depends on lang_get(), config()
+     * config() is called in lang_get()
      * 
-     * set the default
      * 
-     * @param string $name - (optional)
+     * @return bool true  - if the lang_get is     rtl
+     *              false - if the lang_get is not rtl
      * 
-     * 
-     * @version 1.0.0
-     * @since 1.0.0
+     * @version 2.0.0
+     * @since 2.0.0
      * @author Mahmudul Hasan Mithu
      */
-    public static function lang_default_set( $name='' )
+    public static function rtl()
     {
-        if( $name=='' ){
-            $name = 'en';
-            setcookie( 'LL_Lang_Default', $name, (time()+(3600*24*30*13*100)), '/' );
-        }else{
-            setcookie( 'LL_Lang_Default', $name, (time()+(3600*24*30*13*100)), '/' );
+        $lang = self::lang_get();
+        $rtl_langs = self::$config['rtl'];  // get all the rtl langs
+
+        foreach( $rtl_langs as $rtl_lang ){
+            if( $rtl_lang==$lang ){
+                return true;
+                break;
+            }
         }
+
+        return false;
     }
 
 
-    /**
-     * 
-     * get the default language
-     * 
-     * 
-     * @return string - language name
-     * 
-     * @version 1.0.0
-     * @since 1.0.0
-     * @author Mahmudul Hasan Mithu
-     */
-    public static function lang_default_get()
-    {
-        if( isset($_COOKIE['LL_Lang_Default']) ){
-            $lang = htmlspecialchars($_COOKIE['LL_Lang_Default']);
-        }else{
-            self::lang_default_set();
-            $lang = 'en';
-        }
-        return $lang;
-    }
 
-
+    
     /**
      * 
      * get the translated word
+     * -------------------------
+     * depends on lang_get()
      * 
-     * @param string $file
      * @param string $word
      * 
      * @return string - translated word
-     *                - if not found then return (string), 'Error: Word is not available in this language.'
+     *                - if not found then return (string), 'ERROR: Language Translate Process Failed'
      * 
      * 
-     * @version 1.0.0
+     * @version 2.0.0
      * @since 1.0.0
      * @author Mahmudul Hasan Mithu
      */
-    public static function __( $file, $word )
+    public static function __( $word )
     {
         $lang = self::lang_get();
+        $lang_file = self::$Path;
 
-        $lang_file = file_get_contents( self::$Path.$file.'.json' ) ;
+        $lang_file = json_decode( file_get_contents( $lang_file ), true );
 
-        $lang_file = json_decode( $lang_file, true );
-
-        return $lang_file[ $lang ][ $word ] ?? $lang_file[ self::lang_default_get() ][ $word ] ?? 'ERROR: Language Translate Process Failed' ;
+        return $lang_file[ $lang ][ $word ] ?? 'ERROR: Language Translate Process Failed' ;
     }
 }
