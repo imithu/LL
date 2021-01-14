@@ -29,7 +29,7 @@ class Lang{
     private static $lang_default = NULL ;
 
     /**
-     * @var string $Path - Set the language location files
+     * @var string $Path - Set the language absolute path
      * 
      * @version 1.0.0
      * @since 1.0.0
