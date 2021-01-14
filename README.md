@@ -1,4 +1,4 @@
-# LL - Language Localization
+# [LL - Language Localization](https://github.com/imithu/LL)
 
 ## Installation
 via composer
@@ -9,19 +9,30 @@ composer require imithu/ll
 
 
 ## Guide
+create a config file in this location\
+storage/app/LL/Self/config.json\
+and set there the default language and rtl languages
+``` json
+    {
+        "lang_default": "lang_name",
+        "rtl": [ "lang_name", "lang_name" ]
+    }
+```
+
+in page,
 ``` php
 use LL\Lang;                    // load Lang class
 
-Lang::$Path = 'value'; // set language location in full path
-                                // eg.  __DIR__.'/folderName/';
+Lang::$Path = 'value'; // set language json file location in full path
+                                // eg. Storage::disk( value )->path( value ) ;
 
 Lang::lang_set( 'lang_name' );  // set current language
 Lang::lang_get();               // get current language
 
-Lang::lang_default_set( 'default_lang_name' );  // (optional) set default language
-Lang::lang_default_get();                       // (optional) get default language
 
-Lang::__( 'folder/file', 'word' );              // get translated word
+Lang::__( 'Word_key' );              // get translated word
+
+Lang::rtl();   // return true if language direction is rtl else false
 
 ```
 
@@ -36,24 +47,20 @@ use LL\Lang;
 
 Lang::lang_set( 'bn' ); // tips: use this with javascript fetch or ajax once
 
-Lang::$Path = __DIR__.'/folderName/';
+Lang::$Path = Storage::disk('local')->path('folder/page.json');
 
 /**
  *  here,
- *  'Header' is the folder name
- *  'Menu' is the json file name
- *  and 'Home' is the word name
- * 
- * you can create unlimited number of nested folder.
- * fun fact: folder is optional. (:
- * 
+ *  page.json is the languages json file name
+ *  you can create unlimited number of nested folder.
+ *  fun fact: folder is optional. (:
  * 
  */
-echo Lang::__( 'Header/Menu','Home' ); // it will show বাড়ি
+echo Lang::__( 'Home' ); // it will show বাড়ি
 
 ```
 
-Header/Menu.json
+folder/page.json
 ``` json
 {
     "ar":
