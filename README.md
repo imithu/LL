@@ -1,4 +1,4 @@
-# [LL - Language Localization](https://github.com/imithu/LL)
+# [LL - Language Localization](https://github.com/imithu/LL-Laravel)
 
 ## Installation
 via composer
