@@ -3,7 +3,7 @@
 ## Installation
 via composer
 ``` sh
-composer require imithu/ll
+composer require imithu/ll-laravel
 ```
 
 
