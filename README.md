@@ -11,11 +11,16 @@ composer require imithu/ll-laravel
 ## Guide
 create a config file in this location\
 storage/app/LL/Self/config.json\
-and set there the default language and rtl languages
+and set there the default language, rtl languages and infos
 ``` json
     {
         "lang_default": "lang_name",
-        "rtl": [ "lang_name", "lang_name" ]
+        "rtl": [ "lang_name_1", "lang_name_2", "lang_name_..." ],
+        "info": 
+        [
+            [ "key", "info_1", "info_2", "info_..." ],
+            [ "key", "info_1", "info_2", "info_..." ]
+        ]
     }
 ```
 
@@ -32,7 +37,9 @@ Lang::lang_get();               // get current language
 
 Lang::__( 'Word_key' );              // get translated word
 
+
 Lang::rtl();   // return true if language direction is rtl else false
+Lang::info( 'key' );  // get all the info based on that key
 
 ```
 
