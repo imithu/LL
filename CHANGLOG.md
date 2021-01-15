@@ -1,3 +1,10 @@
+### [v2.1.0](https://github.com/imithu/LL-Laravel/releases/tag/v2.1.0) - 2021-Jan-15
+#### Added
+- info() is added
+
+
+
+
 ### [v2.0.2](https://github.com/imithu/LL-Laravel/releases/tag/v2.0.2) - 2021-Jan-15
 #### Changed
 - better doc in codes
