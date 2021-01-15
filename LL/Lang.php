@@ -167,4 +167,34 @@ class Lang{
 
         return $lang_file[ $lang ][ $word ] ?? 'ERROR: Language Translate Process Failed' ;
     }
+
+
+
+    
+    /**
+     * get information on a certain key
+     * ---------------------------------
+     * depends on config()
+     * 
+     * @param string $key
+     * 
+     * @return array - all the info based on that key
+     * 
+     * @version 2.1.0
+     * @since 2.1.0
+     * @author Mahmudul Hasan Mithu
+     */
+    public static function info( $key )
+    {
+        self::config();
+        
+        $infos = self::$config['info'];
+
+        foreach($infos as $info){
+            if($info[0]==$key){
+                return $info;
+                break;
+            }
+        }
+    }
 }
