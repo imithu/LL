@@ -96,7 +96,7 @@ class Lang
      * @return string - language name
      * 
      * @since   1.0.0
-     * @version 2.0.0
+     * @version 2.1.1
      * @author  Mahmudul Hasan Mithu
      */
     public static function lang_get()
@@ -107,7 +107,6 @@ class Lang
             return htmlspecialchars($_COOKIE['LL_Lang']);
         }
         
-        self::lang_set( self::$lang_default );
         return self::$lang_default;
     }
 
