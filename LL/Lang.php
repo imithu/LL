@@ -3,37 +3,41 @@
 namespace LL;
 
 
+
+
 use Illuminate\Support\Facades\Storage;
 
 
 
-class Lang{
+
+class Lang
+{
 
     /**
      * @var array $config
      * 
      * 
+     * @since   2.0.0
      * @version 2.0.0
-     * @since 2.0.0
-     * @author Mahmudul Hasan Mithu
+     * @author  Mahmudul Hasan Mithu
      */
     private static $config = NULL;
 
     /**
      * @var string $lang_default
      * 
+     * @since   2.0.0
      * @version 2.0.0
-     * @since 2.0.0
-     * @author Mahmudul Hasan Mithu
+     * @author  Mahmudul Hasan Mithu
      */
     private static $lang_default = NULL ;
 
     /**
      * @var string $Path - Set the language absolute path
      * 
+     * @since   1.0.0
      * @version 1.0.0
-     * @since 1.0.0
-     * @author Mahmudul Hasan Mithu
+     * @author  Mahmudul Hasan Mithu
      */
     public static $Path = '';
 
@@ -49,9 +53,9 @@ class Lang{
      * @param string $lang - lang name
      * 
      * 
+     * @since   1.0.0
      * @version 2.0.0
-     * @since 1.0.0
-     * @author Mahmudul Hasan Mithu
+     * @author  Mahmudul Hasan Mithu
      */
     public static function lang_set( $lang )
     {
@@ -66,8 +70,8 @@ class Lang{
      * ----------------------------------
      * totally independent method
      * 
-     * @version 2.0.0
      * @since   2.0.0
+     * @version 2.0.0
      * @author  Mahmudul Hasan Mithu
      */
     private static function config()
@@ -91,9 +95,9 @@ class Lang{
      * 
      * @return string - language name
      * 
+     * @since   1.0.0
      * @version 2.0.0
-     * @since 1.0.0
-     * @author Mahmudul Hasan Mithu
+     * @author  Mahmudul Hasan Mithu
      */
     public static function lang_get()
     {
@@ -120,9 +124,9 @@ class Lang{
      * @return bool true  - if the lang_get is     rtl
      *              false - if the lang_get is not rtl
      * 
+     * @since   2.0.0
      * @version 2.0.0
-     * @since 2.0.0
-     * @author Mahmudul Hasan Mithu
+     * @author  Mahmudul Hasan Mithu
      */
     public static function rtl()
     {
@@ -154,9 +158,9 @@ class Lang{
      *                - if not found then return (string), 'ERROR: Language Translate Process Failed'
      * 
      * 
+     * @since   1.0.0
      * @version 2.0.0
-     * @since 1.0.0
-     * @author Mahmudul Hasan Mithu
+     * @author  Mahmudul Hasan Mithu
      */
     public static function __( $word )
     {
@@ -180,9 +184,9 @@ class Lang{
      * 
      * @return array - all the info based on that key
      * 
+     * @since   2.1.0
      * @version 2.1.0
-     * @since 2.1.0
-     * @author Mahmudul Hasan Mithu
+     * @author  Mahmudul Hasan Mithu
      */
     public static function info( $key )
     {
