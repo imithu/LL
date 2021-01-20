@@ -1,3 +1,10 @@
+### [v2.1.1](https://github.com/imithu/LL-Laravel/releases/tag/v2.1.1) - 2021-Jan-20
+#### Changed
+- lang_get() has improved
+
+
+
+
 ### [v2.1.0](https://github.com/imithu/LL-Laravel/releases/tag/v2.1.0) - 2021-Jan-15
 #### Added
 - info() is added
