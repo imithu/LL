@@ -158,7 +158,7 @@ class Lang
      * 
      * 
      * @since   1.0.0
-     * @version 2.0.0
+     * @version 2.1.2
      * @author  Mahmudul Hasan Mithu
      */
     public static function __( $word )
@@ -168,7 +168,7 @@ class Lang
 
         $lang_file = json_decode( file_get_contents( $lang_file ), true );
 
-        return $lang_file[ $lang ][ $word ] ?? 'ERROR: Language Translate Process Failed' ;
+        return $lang_file[ $lang ][ $word ] ?? $lang_file[ self::$lang_default ][ $word ] ?? 'ERROR: Language Translate Process Failed' ;
     }
 
 
