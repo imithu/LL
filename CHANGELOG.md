@@ -1,3 +1,10 @@
+### [2.2.0](https://github.com/imithu/LL-Laravel/releases/tag/2.2.0) - 2021-Feb-01
+#### Changed
+- directory of config file has been changed
+
+
+
+
 ### [2.1.2](https://github.com/imithu/LL-Laravel/releases/tag/2.1.2) - 2021-Jan-21
 #### Fixed
 - fixed __() - default language is not working for single word
