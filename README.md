@@ -10,7 +10,7 @@ composer require imithu/ll-laravel
 
 ## Guide
 create a config file in this location\
-storage/app/LL/Self/config.json\
+storage/app/ll/self/config.json\
 and set there the default language, rtl languages and infos
 ``` json
     {
