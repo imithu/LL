@@ -71,12 +71,12 @@ class Lang
      * totally independent method
      * 
      * @since   2.0.0
-     * @version 2.0.0
+     * @version 2.2.0
      * @author  Mahmudul Hasan Mithu
      */
     private static function config()
     {
-        $config = Storage::disk('local')->path('LL/Self/config.json');
+        $config = Storage::disk('local')->path('ll/self/config.json');
         $config = json_decode(file_get_contents($config), true);
 
         self::$config = $config;
